@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "OtraAppDelDolarEnVzla",
-    "slug": "otra-app-del-dolar-en-vzla",
+    "slug": "otra-app-del-dolar-vzla",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/favicon.png",
@@ -32,17 +32,20 @@
     },
     "plugins": [
       "expo-router",
-      ["expo-splash-screen", {
-        "backgroundColor": "#336A33",
-        "image": "./assets/images/splash-icon-dark.png",
-        "dark": {
-          "image": "./assets/images/splash-icon-dark.png"
-        },
-        "light": {
-          "image": "./assets/images/splash-icon-light.png"
-        },
-        "imageWidth": 200
-      }]
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#336A33",
+          "image": "./assets/images/splash-icon-dark.png",
+          "dark": {
+            "image": "./assets/images/splash-icon-dark.png"
+          },
+          "light": {
+            "image": "./assets/images/splash-icon-light.png"
+          },
+          "imageWidth": 200
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
@@ -50,8 +53,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "e44456a9-435d-4d75-be49-6b34d525483c"
+        "projectId": "5bf80979-98ab-40e0-943a-6d76264ca7bf"
       }
-    }
+    },
+    "owner": "jodaz"
   }
 }
