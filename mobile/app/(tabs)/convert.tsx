@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useExchangeRates } from '@/hooks/use-exchange-rates';
 import * as Clipboard from 'expo-clipboard';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { formatNumber, formatInputDisplay } from '@/utils/format';
 
 type FormData = {
   usd: string;
@@ -47,11 +48,13 @@ export default function ConvertirScreen() {
   };
 
   const calculate = (amountStr: string, currency: 'USD' | 'EUR' | 'USDT', mode: 'toBs' | 'toUnit') => {
-    const amount = parseFloat(amountStr);
-    if (isNaN(amount)) return '0.00';
+    // Clean string from any potential formatting artifact (though input should be clean)
+    const normalized = amountStr.replace(/,/g, '');
+    const amount = parseFloat(normalized);
+    if (isNaN(amount)) return '0';
 
     const rate = rates[currency];
-    if (!rate || rate === 0) return '0.00';
+    if (!rate || rate === 0) return '0';
 
     if (mode === 'toUnit') {
       return (amount / rate).toFixed(2);
@@ -81,19 +84,19 @@ export default function ConvertirScreen() {
               <TextInput
                 style={styles.input}
                 onBlur={onBlur}
-                onChangeText={onChange}
+                onChangeText={(text) => onChange(formatInputDisplay(text))}
                 value={value}
                 placeholder="0.00"
                 placeholderTextColor="#666"
-                keyboardType="numeric"
+                keyboardType="decimal-pad"
               />
             )}
           />
         </View>
         <Text style={styles.arrow}>→</Text>
         <View style={styles.resultContainer}>
-          <Text style={styles.resultValue}>{result} Bs</Text>
-          {renderCopyButton(result, `u2b-${currency}`)}
+          <Text style={styles.resultValue}>{formatNumber(result)} Bs</Text>
+          {renderCopyButton(formatNumber(result), `u2b-${currency}`)}
         </View>
       </View>
     );
@@ -118,11 +121,11 @@ export default function ConvertirScreen() {
               <TextInput
                 style={styles.input}
                 onBlur={onBlur}
-                onChangeText={onChange}
+                onChangeText={(text) => onChange(formatInputDisplay(text))}
                 value={value}
                 placeholder="0.00"
                 placeholderTextColor="#666"
-                keyboardType="numeric"
+                keyboardType="decimal-pad"
               />
             )}
           />
@@ -133,8 +136,8 @@ export default function ConvertirScreen() {
              <View key={item.currency} style={styles.resultRow}>
                <Text style={styles.resultRowLabel}>{item.label}</Text>
                <View style={styles.resultRowValueContainer}>
-                 <Text style={styles.resultRowValue}>{item.value} {item.currency}</Text>
-                 {renderCopyButton(item.value, `b2u-${item.currency}`)}
+                 <Text style={styles.resultRowValue}>{formatNumber(item.value)} {item.currency}</Text>
+                 {renderCopyButton(formatNumber(item.value), `b2u-${item.currency}`)}
                </View>
              </View>
            ))}

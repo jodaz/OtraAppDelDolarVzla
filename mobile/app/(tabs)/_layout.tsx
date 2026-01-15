@@ -13,10 +13,10 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#fff',
-        tabBarInactiveTintColor: '#888',
+        tabBarInactiveTintColor: '#448A44',
+        tabBarActiveTintColor: '#F1C40F',
         tabBarStyle: {
-          backgroundColor: '#121212',
+          backgroundColor: '#145931',
           borderTopColor: '#333',
         },
         headerShown: false,
@@ -26,7 +26,11 @@ export default function TabLayout() {
         options={{
           title: 'OtraAppDelDolarEnVzla',
           tabBarLabel: 'Tasas',
-          tabBarIcon: ({ color }) => <BarChart2 size={24} color={color} />,
+          tabBarIcon: ({ color }) => <BarChart2 size={24} color={color} strokeWidth={2} />,
+          tabBarLabelStyle: {
+            fontSize: 13,
+            fontWeight: 'bold',
+          },
         }}
       />
       <Tabs.Screen
@@ -34,7 +38,11 @@ export default function TabLayout() {
         options={{
           title: 'OtraAppDelDolarEnVzla',
           tabBarLabel: 'Convertir',
-          tabBarIcon: ({ color }) => <RefreshCw size={24} color={color} />,
+          tabBarIcon: ({ color }) => <RefreshCw size={24} color={color} strokeWidth={2} />,
+          tabBarLabelStyle: {
+            fontSize: 13,
+            fontWeight: 'bold',
+          },
         }}
       />
     </Tabs>
