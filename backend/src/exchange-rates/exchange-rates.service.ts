@@ -107,11 +107,11 @@ export class ExchangeRatesService {
     return `This action removes a #${id} exchangeRate`;
   }
 
-  async getBinanceAverage(asset: string, fiat: string, tradeType: string) {
+  async getBinanceAverage(asset: string, fiat: string, tradeType: string, updateDb: boolean = false) {
     const price = await this.binanceProvider.getAveragePrice(asset, fiat, tradeType);
     
-    // Proactively update USDT in DB as well if it's USDT
-    if (asset === 'USDT' && fiat === 'VES') {
+    // Update DB only if explicitly requested
+    if (updateDb && asset === 'USDT' && fiat === 'VES') {
       await this.supabaseService.getClient()
         .from('exchange_rates')
         .upsert({
