@@ -21,7 +21,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Libera',
+          title: 'AKomo',
           tabBarLabel: 'Tasas',
           tabBarIcon: ({ color }) => <BarChart2 size={24} color={color} strokeWidth={2} />,
           tabBarLabelStyle: {
