@@ -27,7 +27,7 @@ export default function TabLayout() {
           tabBarLabelStyle: {
             fontSize: 13,
             fontWeight: 'bold',
-            fontFamily: 'NotoSans_700Bold',
+            fontFamily: 'Zain_700Bold',
           },
         }}
       />
@@ -40,7 +40,7 @@ export default function TabLayout() {
           tabBarLabelStyle: {
             fontSize: 13,
             fontWeight: 'bold',
-            fontFamily: 'NotoSans_700Bold',
+            fontFamily: 'Zain_700Bold',
           },
         }}
       />
