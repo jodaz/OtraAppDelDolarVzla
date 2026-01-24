@@ -35,7 +35,14 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "name": "AKomo",
+      "shortName": "AKomo",
+      "startUrl": "/",
+      "display": "standalone",
+      "backgroundColor": "#336A33",
+      "themeColor": "#336A33",
+      "lang": "es"
     },
     "plugins": [
       "expo-router",
