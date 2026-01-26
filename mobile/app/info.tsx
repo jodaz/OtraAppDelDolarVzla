@@ -1,9 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView, Image, Linking, TouchableOpacity, StatusBar } from 'react-native';
+import { View, StyleSheet, ScrollView, SafeAreaView, Image, Linking, TouchableOpacity, StatusBar, Platform, useWindowDimensions } from 'react-native';
 import { Text } from '@/components/Themed';
-import { ExternalLink } from 'lucide-react-native';
+import { CreditsFooter } from '@/components/CreditsFooter';
+
+import { TopHeader } from '@/components/TopHeader';
+import { GradientBackground } from '@/components/GradientBackground';
 
 export default function InfoScreen() {
+  const { width } = useWindowDimensions();
+  const isDesktop = Platform.OS === 'web' && width > 768;
+
   const openWebsite = () => {
     Linking.openURL('https://jodaz.xyz');
   };
@@ -11,20 +17,16 @@ export default function InfoScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
+      <GradientBackground>
 
-      {/* Background Particles for consistency with Home */}
-      <View style={[styles.particle, { top: 80, left: 40, width: 8, height: 8, backgroundColor: '#14b8a6', opacity: 0.2 }]} />
-      <View style={[styles.particle, { top: 160, right: 80, width: 12, height: 12, backgroundColor: '#a855f7', opacity: 0.15 }]} />
-      <View style={[styles.particle, { bottom: 240, left: '25%', width: 8, height: 8, backgroundColor: '#2dd4bf', opacity: 0.1 }]} />
-      <View style={[styles.particle, { top: '50%', right: 40, width: 8, height: 8, backgroundColor: '#c084fc', opacity: 0.15 }]} />
+      <TopHeader />
 
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.header}>
-          <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
-          <Text style={styles.title}>Sobre la app</Text>
-        </View>
-
-        <View style={styles.content}>
+      <ScrollView contentContainerStyle={[styles.scrollContent, isDesktop && styles.desktopScrollContent]}>
+        <View style={isDesktop ? styles.desktopCardContainer : styles.mobileCardContainer}>
+          <View style={styles.card}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Sobre la app</Text>
+          </View>
           <Text style={styles.text}>
             Esta aplicación proporciona información oficial y pública sobre la tasa de cambio en Venezuela, basada en datos del Banco Central de Venezuela (BCV) y otros indicadores de interés nacional.
           </Text>
@@ -48,18 +50,14 @@ export default function InfoScreen() {
           <Text style={styles.disclaimerText}>
             Descargo de responsabilidad: Los desarrolladores no somos autores de la información mostrada ni responsables por su exactitud. Esta app no constituye asesoría financiera; el uso de los datos es responsabilidad del usuario.
           </Text>
+          </View>
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.footerLabel}>Desarrollado por</Text>
-          <TouchableOpacity onPress={openWebsite} style={styles.linkContainer}>
-            <Text style={styles.linkText}>Jesus</Text>
-            <Text style={styles.linkSeparator}> • </Text>
-            <Text style={styles.linkUrl}>jodaz.xyz</Text>
-            <ExternalLink size={16} color="#F1C40F" style={styles.linkIcon} />
-          </TouchableOpacity>
+          <CreditsFooter />
         </View>
       </ScrollView>
+      </GradientBackground>
     </SafeAreaView>
   );
 }
@@ -67,16 +65,24 @@ export default function InfoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#145931',
-  },
-  particle: {
-    position: 'absolute',
-    borderRadius: 9999,
+    backgroundColor: 'transparent',
   },
   scrollContent: {
     padding: 24,
     paddingTop: 40,
     paddingBottom: 40,
+    alignItems: 'center',
+    flexGrow: 1,
+  },
+  desktopScrollContent: {
+    justifyContent: 'center',
+  },
+  desktopCardContainer: {
+    width: '100%',
+    maxWidth: 600,
+  },
+  mobileCardContainer: {
+    width: '100%',
   },
   header: {
     alignItems: 'center',
@@ -93,13 +99,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  content: {
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+  card: {
     borderRadius: 20,
     padding: 24,
     marginBottom: 40,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: '#1B6B3E',
   },
   divider: {
     height: 1,

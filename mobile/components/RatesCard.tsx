@@ -184,9 +184,12 @@ export function RatesCard({ data }: RatesCardProps) {
 
 const styles = StyleSheet.create({
   card: {
-    width: '100%',
-    backgroundColor: '#448A44',
+    borderRadius: 20,
     padding: 24,
+    marginBottom: 40,
+    borderWidth: 1,
+    borderColor: '#1B6B3E',
+    marginHorizontal: 10,
   },
   headerRow: {
     flexDirection: 'row',
