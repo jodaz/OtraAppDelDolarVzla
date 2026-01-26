@@ -4,6 +4,7 @@ import { Text } from '@/components/Themed';
 import { CreditsFooter } from '@/components/CreditsFooter';
 
 import { TopHeader } from '@/components/TopHeader';
+import { GradientBackground } from '@/components/GradientBackground';
 
 export default function InfoScreen() {
   const openWebsite = () => {
@@ -13,6 +14,8 @@ export default function InfoScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
+      <GradientBackground>
+
       <TopHeader />
 
       {/* Background Particles for consistency with Home */}
@@ -22,12 +25,11 @@ export default function InfoScreen() {
       <View style={[styles.particle, { top: '50%', right: 40, width: 8, height: 8, backgroundColor: '#c084fc', opacity: 0.15 }]} />
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.header}>
-          <Image source={{ uri: '/assets/images/logo.png' }} style={styles.logo} />
-          <Text style={styles.title}>Sobre la app</Text>
-        </View>
 
-        <View style={styles.content}>
+        <View style={styles.card}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Sobre la app</Text>
+          </View>
           <Text style={styles.text}>
             Esta aplicación proporciona información oficial y pública sobre la tasa de cambio en Venezuela, basada en datos del Banco Central de Venezuela (BCV) y otros indicadores de interés nacional.
           </Text>
@@ -57,6 +59,7 @@ export default function InfoScreen() {
           <CreditsFooter />
         </View>
       </ScrollView>
+      </GradientBackground>
     </SafeAreaView>
   );
 }
@@ -64,7 +67,7 @@ export default function InfoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#145931',
+    backgroundColor: 'transparent',
   },
   particle: {
     position: 'absolute',
@@ -90,13 +93,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  content: {
-    backgroundColor: '#448A44',
+  card: {
     borderRadius: 20,
     padding: 24,
     marginBottom: 40,
     borderWidth: 1,
     borderColor: '#1B6B3E',
+    marginHorizontal: 10,
   },
   divider: {
     height: 1,

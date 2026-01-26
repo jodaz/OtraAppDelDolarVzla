@@ -20,7 +20,7 @@ export function TopHeader() {
   };
 
   const activeColor = '#F1C40F';
-  const inactiveColor = '#1B6B3E';
+  const inactiveColor = '#09c058ff';
 
   const isHomeActive = pathname === '/' || pathname === '/index';
   const isInfoActive = pathname === '/info';
@@ -31,11 +31,7 @@ export function TopHeader() {
             {/* Logo Section */}
             <View style={styles.logoRow}>
                 {/* Logo without require - assuming standard asset path or web-accessible URI */}
-                <Image 
-                    source={{ uri: '/assets/images/logo.png' }} 
-                    style={styles.logo} 
-                    resizeMode="contain"
-                />
+                <Image source={require('../assets/images/logo.png')} style={styles.logo} />
                 <Text style={styles.appName}>AKomo</Text>
             </View>
             

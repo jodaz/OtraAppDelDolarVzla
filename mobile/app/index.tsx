@@ -5,6 +5,7 @@ import { useExchangeRates } from '@/hooks/use-exchange-rates';
 import { RatesCard } from '@/components/RatesCard';
 import { TopHeader } from '@/components/TopHeader';
 import { CreditsFooter } from '@/components/CreditsFooter';
+import { GradientBackground } from '@/components/GradientBackground';
 
 export default function TasasScreen() {
   const { data, isLoading: loading } = useExchangeRates();
@@ -21,27 +22,29 @@ export default function TasasScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <GradientBackground>
+        <StatusBar barStyle="light-content" />
 
-      {/* Dynamic background particles (simulated) */}
-      <View style={[styles.particle, { top: 80, left: 40, width: 8, height: 8, backgroundColor: '#14b8a6', opacity: 0.4 }]} />
-      <View style={[styles.particle, { top: 160, right: 80, width: 12, height: 12, backgroundColor: '#a855f7', opacity: 0.3 }]} />
-      <View style={[styles.particle, { bottom: 240, left: '25%', width: 8, height: 8, backgroundColor: '#2dd4bf', opacity: 0.2 }]} />
-      <View style={[styles.particle, { top: '50%', right: 40, width: 8, height: 8, backgroundColor: '#c084fc', opacity: 0.25 }]} />
-      <View style={[styles.particle, { top: '75%', left: 40, width: 4, height: 4, backgroundColor: '#5eead4', opacity: 0.5 }]} />
+        {/* Dynamic background particles (simulated) */}
+        <View style={[styles.particle, { top: 80, left: 40, width: 8, height: 8, backgroundColor: '#14b8a6', opacity: 0.4 }]} />
+        <View style={[styles.particle, { top: 160, right: 80, width: 12, height: 12, backgroundColor: '#a855f7', opacity: 0.3 }]} />
+        <View style={[styles.particle, { bottom: 240, left: '25%', width: 8, height: 8, backgroundColor: '#2dd4bf', opacity: 0.2 }]} />
+        <View style={[styles.particle, { top: '50%', right: 40, width: 8, height: 8, backgroundColor: '#c084fc', opacity: 0.25 }]} />
+        <View style={[styles.particle, { top: '75%', left: 40, width: 4, height: 4, backgroundColor: '#5eead4', opacity: 0.5 }]} />
 
-      <TopHeader />
+        <TopHeader />
 
-      <ScrollView contentContainerStyle={[styles.scrollContent, isDesktop && styles.desktopScrollContent]}>
-        {/* Rates Card Component */}
-        <View style={isDesktop ? styles.desktopCardContainer : styles.mobileCardContainer}>
-           <RatesCard data={data} />
-        </View>
+        <ScrollView contentContainerStyle={[styles.scrollContent, isDesktop && styles.desktopScrollContent]}>
+          {/* Rates Card Component */}
+          <View style={isDesktop ? styles.desktopCardContainer : styles.mobileCardContainer}>
+            <RatesCard data={data} />
+          </View>
 
-        <View style={styles.footerButtonContainer}>
-           <CreditsFooter />
-        </View>
-      </ScrollView>
+          <View style={styles.footerButtonContainer}>
+            <CreditsFooter />
+          </View>
+        </ScrollView>
+      </GradientBackground>
     </SafeAreaView>
   );
 }
@@ -49,7 +52,7 @@ export default function TasasScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#145931',
+    backgroundColor: 'transparent',
   },
   center: {
     justifyContent: 'center',
