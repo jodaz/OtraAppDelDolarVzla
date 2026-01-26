@@ -21,9 +21,7 @@ jobs:
       - name: 🏗 Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'pnpm'
-          cache-dependency-path: mobile/pnpm-lock.yaml
+          node-version: 22
 
       - name: 🏗 Setup Expo
         uses: expo/expo-github-action@v8
