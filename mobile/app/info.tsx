@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, SafeAreaView, Image, Linking, TouchableOpacity, StatusBar } from 'react-native';
 import { Text } from '@/components/Themed';
-import { ExternalLink } from 'lucide-react-native';
+import { CreditsFooter } from '@/components/CreditsFooter';
+
+import { TopHeader } from '@/components/TopHeader';
 
 export default function InfoScreen() {
   const openWebsite = () => {
@@ -11,6 +13,7 @@ export default function InfoScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
+      <TopHeader />
 
       {/* Background Particles for consistency with Home */}
       <View style={[styles.particle, { top: 80, left: 40, width: 8, height: 8, backgroundColor: '#14b8a6', opacity: 0.2 }]} />
@@ -20,7 +23,7 @@ export default function InfoScreen() {
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
-          <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
+          <Image source={{ uri: '/assets/images/logo.png' }} style={styles.logo} />
           <Text style={styles.title}>Sobre la app</Text>
         </View>
 
@@ -51,13 +54,7 @@ export default function InfoScreen() {
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.footerLabel}>Desarrollado por</Text>
-          <TouchableOpacity onPress={openWebsite} style={styles.linkContainer}>
-            <Text style={styles.linkText}>Jesus</Text>
-            <Text style={styles.linkSeparator}> • </Text>
-            <Text style={styles.linkUrl}>jodaz.xyz</Text>
-            <ExternalLink size={16} color="#F1C40F" style={styles.linkIcon} />
-          </TouchableOpacity>
+          <CreditsFooter />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -94,12 +91,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   content: {
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    backgroundColor: '#448A44',
     borderRadius: 20,
     padding: 24,
     marginBottom: 40,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: '#1B6B3E',
   },
   divider: {
     height: 1,

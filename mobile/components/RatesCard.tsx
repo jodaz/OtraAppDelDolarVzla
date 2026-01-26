@@ -31,9 +31,9 @@ export function RatesCard({ data }: RatesCardProps) {
         return <Image source={require('../assets/images/logos/usdt.png')} style={{ width: 24, height: 24 }} />;
       case lowerLabel.includes('euro'):
       case lowerLabel.includes('eur'):
-        return <Euro size={24} color="#14b8a6" />;
+        return <Euro size={24} color="#1B6B3E" />;
       default:
-        return <DollarSign size={24} color="#14b8a6" />;
+        return <DollarSign size={24} color="#1B6B3E" />;
     }
   };
 
@@ -185,6 +185,7 @@ export function RatesCard({ data }: RatesCardProps) {
 const styles = StyleSheet.create({
   card: {
     width: '100%',
+    borderRadius: 20,
     backgroundColor: '#448A44',
     padding: 24,
   },
@@ -266,7 +267,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(20, 184, 166, 0.15)',
+    backgroundColor: 'rgba(27, 107, 62, 0.15)',
     justifyContent: 'center',
     alignItems: 'center',
   },

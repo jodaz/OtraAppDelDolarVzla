@@ -1,11 +1,15 @@
-import { View, ScrollView, SafeAreaView, StatusBar, StyleSheet, ActivityIndicator, Image } from 'react-native';
+import { View, ScrollView, SafeAreaView, StatusBar, StyleSheet, ActivityIndicator, Image, Platform, useWindowDimensions } from 'react-native';
 import { Text } from '@/components/Themed';
 import React from 'react';
 import { useExchangeRates } from '@/hooks/use-exchange-rates';
 import { RatesCard } from '@/components/RatesCard';
+import { TopHeader } from '@/components/TopHeader';
+import { CreditsFooter } from '@/components/CreditsFooter';
 
 export default function TasasScreen() {
   const { data, isLoading: loading } = useExchangeRates();
+  const { width } = useWindowDimensions();
+  const isDesktop = Platform.OS === 'web' && width > 768;
 
   if (loading) {
     return (
@@ -26,18 +30,17 @@ export default function TasasScreen() {
       <View style={[styles.particle, { top: '50%', right: 40, width: 8, height: 8, backgroundColor: '#c084fc', opacity: 0.25 }]} />
       <View style={[styles.particle, { top: '75%', left: 40, width: 4, height: 4, backgroundColor: '#5eead4', opacity: 0.5 }]} />
 
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Header */}
-        <View style={styles.header}>
-          <View style={styles.headerTitleRow}>
-            <Image source={require('../../assets/images/logo.png')} style={styles.headerIcon} />
-            <Text style={styles.headerTitle}>AKomo</Text>
-          </View>
-          <Text style={styles.headerSubtitle}>Tasas de cambio en Venezuela</Text>
+      <TopHeader />
+
+      <ScrollView contentContainerStyle={[styles.scrollContent, isDesktop && styles.desktopScrollContent]}>
+        {/* Rates Card Component */}
+        <View style={isDesktop ? styles.desktopCardContainer : styles.mobileCardContainer}>
+           <RatesCard data={data} />
         </View>
 
-        {/* Rates Card Component */}
-        <RatesCard data={data} />
+        <View style={styles.footerButtonContainer}>
+           <CreditsFooter />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -57,13 +60,26 @@ const styles = StyleSheet.create({
     borderRadius: 9999,
   },
   scrollContent: {
-    paddingTop: 40,
+    paddingTop: 20,
     alignItems: 'center',
     paddingBottom: 40,
+    flexGrow: 1,
+  },
+  desktopScrollContent: {
+    justifyContent: 'center',
+    paddingTop: 40,
+  },
+  desktopCardContainer: {
+    width: '100%',
+    maxWidth: 600,
+  },
+  mobileCardContainer: {
+    width: '100%',
   },
   header: {
     alignItems: 'center',
     marginBottom: 32,
+    marginTop: 20,
   },
   headerTitleRow: {
     flexDirection: 'column',
@@ -85,5 +101,12 @@ const styles = StyleSheet.create({
     color: '#F1C40F',
     fontSize: 18,
   },
+  footerButtonContainer: {
+    marginTop: 40,
+    alignItems: 'center',
+  },
+  footerButtonText: {
+     display: 'none',
+  }
 });
 
